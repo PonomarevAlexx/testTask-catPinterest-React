@@ -4,7 +4,7 @@ import Preloader from "./Preloader";
 
 const API_KEY = "live_GQbPwFOIhAnXcfZXEULbqMKCqySATmd1fKoFdNxxYoDY5gX2zpQakmYd4nl23mxl";
 
-export default function Main() {
+export default function Main({ activeAllCats }) {
     const [cats, setCats] = useState([]);
     const [loading, setLoading] = useState(true);
     const [favoritesCat, setFavoritesCat] = useState(JSON.parse(localStorage.getItem("myCat")) || []);
@@ -34,8 +34,9 @@ export default function Main() {
         toggleClassIcon(e);
     };
 
+    // need edit!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     const toggleClassIcon = (e) => {
-        if (e.target.classList.contains("fa-regular") === true) {
+        if (e.target.classList.contains("fa-regular")) {
             e.target.classList.remove("fa-regular");
             e.target.classList.add("fa-solid");
         } else {
@@ -70,5 +71,17 @@ export default function Main() {
         };
     }, []);
 
-    return <main>{loading ? <Preloader /> : <Cats addFavoriteCat={addFavoriteCat}  cats={cats} />}</main>;
+    return (
+        <main>
+            {activeAllCats ? (
+                loading ? (
+                    <Preloader />
+                ) : (
+                    <Cats addFavoriteCat={addFavoriteCat} cats={cats} />
+                )
+            ) : (
+                <Cats addFavoriteCat={addFavoriteCat} cats={favoritesCat} />
+            )}
+        </main>
+    );
 }
