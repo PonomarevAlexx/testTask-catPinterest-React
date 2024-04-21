@@ -23,7 +23,7 @@ export default function Main({ activeAllCats }) {
             const newEl = {
                 url: e.target.previousElementSibling.src,
                 id: e.target.previousElementSibling.alt,
-                classIcon: "fa-solid fa-heart icon",
+                classIcon: "fa-solid fa-heart photo-container__icon",
             };
             setFavoritesCat([...favoritesCat, newEl]);
         } else {

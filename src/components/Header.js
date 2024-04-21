@@ -2,11 +2,11 @@ export default function Header({ activeAllCats, handleActiveClass }) {
     return (
         <header>
             <nav>
-                <ul>
-                    <li className={`all-cats ${activeAllCats ? "active" : ""}`} onClick={handleActiveClass}>
+                <ul className="menu">
+                    <li className={`menu__btn ${activeAllCats ? "menu__btn_active" : ""}`} onClick={handleActiveClass}>
                         Все котики
                     </li>
-                    <li className={`favorite-cats ${!activeAllCats ? "active" : ""}`} onClick={handleActiveClass}>
+                    <li className={`menu__btn ${!activeAllCats ? "menu__btn_active" : ""}`} onClick={handleActiveClass}>
                         Любимые котики
                     </li>
                 </ul>

@@ -7,12 +7,12 @@ function App() {
     const [activeAllCats, setActiveAllCats] = useState(true);
 
     const handleActiveClass = () => {
-        if(activeAllCats) {
-            setActiveAllCats(false)
+        if (activeAllCats) {
+            setActiveAllCats(false);
         } else {
-            setActiveAllCats(true)
+            setActiveAllCats(true);
         }
-    }
+    };
 
     return (
         <>

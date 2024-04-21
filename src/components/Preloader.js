@@ -1,5 +1,3 @@
 export default function Preloader() {
-    return (
-        <h1 className="preloader">Загрузка...</h1>
-    )
+    return <h1 className="photo-container__preloader">Загрузка...</h1>;
 }
