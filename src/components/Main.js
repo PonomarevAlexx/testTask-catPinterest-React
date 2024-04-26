@@ -79,8 +79,10 @@ export default function Main({ activeAllCats }) {
                 ) : (
                     <Cats addFavoriteCat={addFavoriteCat} cats={cats} />
                 )
-            ) : (
+            ) : favoritesCat.length > 0 ? (
                 <Cats addFavoriteCat={addFavoriteCat} cats={favoritesCat} />
+            ) : (
+                <h1>Пока ничего нет(((</h1>
             )}
         </main>
     );

@@ -3,10 +3,10 @@ export default function Header({ activeAllCats, handleActiveClass }) {
         <header>
             <nav>
                 <ul className="menu">
-                    <li className={`menu__btn ${activeAllCats ? "menu__btn_active" : ""}`} onClick={handleActiveClass}>
+                    <li className={`menu__btn ${activeAllCats ? "menu__btn_active" : ""}`} onClick={(e) => handleActiveClass(e)}>
                         Все котики
                     </li>
-                    <li className={`menu__btn ${!activeAllCats ? "menu__btn_active" : ""}`} onClick={handleActiveClass}>
+                    <li className={`menu__btn ${!activeAllCats ? "menu__btn_active" : ""}`} onClick={(e) => handleActiveClass(e)}>
                         Любимые котики
                     </li>
                 </ul>

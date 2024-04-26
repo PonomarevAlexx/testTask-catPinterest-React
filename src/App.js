@@ -6,11 +6,13 @@ import Main from "./components/Main";
 function App() {
     const [activeAllCats, setActiveAllCats] = useState(true);
 
-    const handleActiveClass = () => {
-        if (activeAllCats) {
-            setActiveAllCats(false);
-        } else {
-            setActiveAllCats(true);
+    const handleActiveClass = (e) => {
+        if(!e.target.classList.contains('menu__btn_active')){
+            if (activeAllCats) {
+                setActiveAllCats(false);
+            } else {
+                setActiveAllCats(true);
+            }
         }
     };
 
