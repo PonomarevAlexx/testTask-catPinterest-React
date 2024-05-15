@@ -9,12 +9,26 @@ export default function Main({ activeAllCats }) {
     const [loading, setLoading] = useState(true);
     const [favoritesCat, setFavoritesCat] = useState(JSON.parse(localStorage.getItem("myCat")) || []);
     const [showMoreCat, setShowMoreCat] = useState(false);
+    const [fetching, setFetching] = useState(true);
 
-    const handleScroll = (e) => {
-        if (e.target.documentElement.scrollHeight - e.target.documentElement.scrollTop - window.innerHeight < 50) {
-            setShowMoreCat(true);
+    useEffect(() => {
+        if(fetching){
+            fetch(`https://api.thecatapi.com/v1/images/search?limit=20&api_key=${API_KEY}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setCats((prev) => [...prev, ...data]);
+                setLoading(false);
+                setFetching(false);
+                setShowMoreCat(false);
+            })
+            .catch((err) => {
+                console.error(err);
+                setLoading(false);
+                setFetching(false);
+                setShowMoreCat(false);
+            });
         }
-    };
+    }, [fetching]);
 
     const addFavoriteCat = (e) => {
         const indexEl = favoritesCat.findIndex((el) => el.id === e.target.previousElementSibling.alt);
@@ -50,40 +64,38 @@ export default function Main({ activeAllCats }) {
     }, [favoritesCat]);
 
     useEffect(() => {
-        fetch(`https://api.thecatapi.com/v1/images/search?limit=20&api_key=${API_KEY}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setCats((prev) => [...prev, ...data]);
-                setLoading(false);
-                setShowMoreCat(false);
-            })
-            .catch((err) => {
-                console.error(err);
-                setLoading(false);
-                setShowMoreCat(false);
-            });
-    }, [showMoreCat]);
-
-    useEffect(() => {
-        window.addEventListener("scroll", (e) => handleScroll(e));
+        if(activeAllCats) {
+            document.addEventListener("scroll", handleScroll);
+        }
+  
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+            document.removeEventListener("scroll", handleScroll);
         };
-    }, []);
+    }, [activeAllCats]);
+
+    const handleScroll = (e) => {
+        if (e.target.documentElement.scrollHeight - e.target.documentElement.scrollTop - window.innerHeight < 50) {
+            setShowMoreCat(true);
+            setFetching(true);
+        }
+    };
 
     return (
-        <main>
-            {activeAllCats ? (
-                loading ? (
-                    <Preloader />
+        <>
+            <main>
+                {activeAllCats ? (
+                    loading ? (
+                        <Preloader />
+                    ) : (
+                        <Cats addFavoriteCat={addFavoriteCat} cats={cats} />
+                    )
+                ) : favoritesCat.length > 0 ? (
+                    <Cats addFavoriteCat={addFavoriteCat} cats={favoritesCat} />
                 ) : (
-                    <Cats addFavoriteCat={addFavoriteCat} cats={cats} />
-                )
-            ) : favoritesCat.length > 0 ? (
-                <Cats addFavoriteCat={addFavoriteCat} cats={favoritesCat} />
-            ) : (
-                <h1>Пока ничего нет(((</h1>
-            )}
-        </main>
+                    <h1>Пока ничего нет(((</h1>
+                )}
+            </main>
+            {showMoreCat && activeAllCats ? <p className="loading">...Загружаем еще котиков...</p> : null}
+        </>
     );
 }

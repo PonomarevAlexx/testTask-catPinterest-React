@@ -91,6 +91,16 @@ nav {
     display: block;
 }
 
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .loading_hidden {
+    display: none;
+} */
+
 @media (max-width: 1024px) {
     .photo-container {
         gap: 24px;
