@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/testTask-catPinterest-React/static/css/main.3f151551.css",
+    "main.js": "/testTask-catPinterest-React/static/js/main.ea6d7ed5.js",
+    "index.html": "/testTask-catPinterest-React/index.html",
+    "main.3f151551.css.map": "/testTask-catPinterest-React/static/css/main.3f151551.css.map",
+    "main.ea6d7ed5.js.map": "/testTask-catPinterest-React/static/js/main.ea6d7ed5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3f151551.css",
+    "static/js/main.ea6d7ed5.js"
+  ]
+}
